@@ -5,9 +5,10 @@ namespace Nostalgia.Data;
 
 public class NostalgiaEntities : DbContext
 {
-    public NostalgiaEntities(DbContextOptions<NostalgiaEntities> options) : base(options)
-    {
-    }
-
     public DbSet<Cosa> Cosas { get; set; }
+
+     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+     {
+         optionsBuilder.UseSqlServer("Server=localhost,1433;Database=Nostalgia;User Id=sa;Password=Cosa@2025;");
+     }
 }
