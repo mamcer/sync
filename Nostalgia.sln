@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nostalgia.Sync", "Nostalgia
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nostalgia.Core", "Nostalgia.Core\Nostalgia.Core.csproj", "{AB9452EA-9A7C-4367-B14D-E9B33A7C9B31}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nostalgia.Data", "Nostalgia.Data\Nostalgia.Data.csproj", "{0BED1130-4A95-480A-8D53-64F2AC8B1CA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{AB9452EA-9A7C-4367-B14D-E9B33A7C9B31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB9452EA-9A7C-4367-B14D-E9B33A7C9B31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB9452EA-9A7C-4367-B14D-E9B33A7C9B31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BED1130-4A95-480A-8D53-64F2AC8B1CA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BED1130-4A95-480A-8D53-64F2AC8B1CA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BED1130-4A95-480A-8D53-64F2AC8B1CA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BED1130-4A95-480A-8D53-64F2AC8B1CA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
