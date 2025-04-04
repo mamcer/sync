@@ -1,4 +1,4 @@
-namespace Cookbook.Core.Interfaces;
+namespace Nostalgia.Core.Interfaces;
 
 public interface IUnitOfWork : IDisposable
 {
