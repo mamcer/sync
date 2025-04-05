@@ -17,16 +17,29 @@ static class Program
         var paths = new List<string>() { directoryPath };
         int fileCount = 0;
         int directoryCount = 0;
-        
+
+        var tasks = new List<Task>();
+        int coreCount = Environment.ProcessorCount;
+
         for (int i = 0; i < paths.Count; i++)
         {
             var files = Directory.GetFiles(paths[i]);
             foreach (var file in files)
             {
-                Console.WriteLine($"\tfound file: {file}");
-                string hash = await ComputeFileHashAsync(file);
-                Console.WriteLine($"\tSHA256 hash: {hash}");
-                fileCount++;
+
+                if (tasks.Count >= coreCount)
+                {
+                    await Task.WhenAny(tasks);
+                    tasks.RemoveAll(t => t.IsCompleted);
+                }
+
+                tasks.Add(Task.Run(async () =>
+                {
+                    Console.WriteLine($"\tfile: {file}");
+                    string hash = await ComputeFileHashAsync(file);
+                    Console.WriteLine($"\thash: {hash}");
+                    Interlocked.Increment(ref fileCount);
+                }));
             }
 
             var directories = Directory.GetDirectories(paths[i]);
@@ -41,6 +54,7 @@ static class Program
 
         // persist
 
+        await Task.WhenAll(tasks);
         Console.WriteLine($"directory count: {directoryCount}\nfile count: {fileCount}");
         Console.WriteLine($"process finished {timer.Elapsed}");
         timer.Stop();
