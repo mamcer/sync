@@ -17,3 +17,4 @@ cosas
     dotnet add package Microsoft.EntityFrameworkCore.SqlServer
     dotnet add package Microsoft.EntityFrameworkCore.Design
     dotnet ef migrations add InitialMigration
+    dotnet ef databae update
