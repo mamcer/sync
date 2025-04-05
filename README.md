@@ -19,6 +19,9 @@ cosas
     dotnet ef migrations add InitialMigration
     dotnet ef databae update
 
+    # export to csv
+    sqlcmd -S localhost -d Nostalgia -U sa -Q "select Id, Name, Path, Hash from Cosas where ScanId = 1" -o "out.csv" -h-1 -s","
+
 ## reference
 
 directory count: 81
