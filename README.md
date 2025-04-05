@@ -18,3 +18,10 @@ cosas
     dotnet add package Microsoft.EntityFrameworkCore.Design
     dotnet ef migrations add InitialMigration
     dotnet ef databae update
+
+## reference
+
+directory count: 81
+file count: 85267
+process finished 04:39:30.5904823    
+222GB
