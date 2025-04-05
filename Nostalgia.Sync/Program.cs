@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Security.Cryptography;
 
 namespace Nostalgia.Sync;
 
@@ -11,7 +12,7 @@ static class Program
         Console.WriteLine($"process started {timer.Elapsed}");
 
         // read
-        string directoryPath = "/home/mario/Desktop/nostalgia";
+        string directoryPath = "/home/mario/Desktop/nostalgia/scan";
 
         var paths = new List<string>(){directoryPath};
         int fileCount = 0;
@@ -22,6 +23,8 @@ static class Program
             foreach (var file in files)
             {
                 Console.WriteLine($"\tfound file: {file}");
+                string hash = ComputeFileHash(file);
+                Console.WriteLine($"\tSHA256 hash: {hash}");
                 fileCount++;
             }
 
@@ -37,8 +40,18 @@ static class Program
 
         // persist
 
-        Console.WriteLine($"directory count: {directoryCount}\nfiles: {fileCount}");
+        Console.WriteLine($"directory count: {directoryCount}\nfile count: {fileCount}");
         Console.WriteLine($"process finished {timer.Elapsed}");
         timer.Stop();
     }
+
+    static string ComputeFileHash(string filePath)
+    {
+        using (var sha256 = SHA256.Create())
+        using (var stream = File.OpenRead(filePath))
+        {
+            var hashBytes = sha256.ComputeHash(stream);
+            return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+        }
+    }    
 }
