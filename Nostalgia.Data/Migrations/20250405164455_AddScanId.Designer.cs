@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nostalgia.Data;
 
@@ -10,9 +11,11 @@ using Nostalgia.Data;
 namespace Nostalgia.Data.Migrations
 {
     [DbContext(typeof(NostalgiaEntities))]
-    partial class NostalgiaEntitiesModelSnapshot : ModelSnapshot
+    [Migration("20250405164455_AddScanId")]
+    partial class AddScanId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

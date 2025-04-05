@@ -50,8 +50,6 @@ static class Program
             }
         }
 
-        // hash 
-
         // persist
 
         await Task.WhenAll(tasks);

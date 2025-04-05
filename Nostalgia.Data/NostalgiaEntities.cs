@@ -9,6 +9,6 @@ public class NostalgiaEntities : DbContext
 
      protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
      {
-         optionsBuilder.UseSqlServer("Server=localhost,1433;Database=Nostalgia;User Id=sa;Password=Cosa@2025;");
+         optionsBuilder.UseSqlServer("Server=localhost,1433;Database=Nostalgia;User Id=sa;Password=Cosa@2025;TrustServerCertificate=yes;");
      }
 }
