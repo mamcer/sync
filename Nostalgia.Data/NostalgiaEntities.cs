@@ -7,8 +7,11 @@ public class NostalgiaEntities : DbContext
 {
     public DbSet<Cosa> Cosas { get; set; }
 
-     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-     {
-         optionsBuilder.UseSqlServer("Server=localhost,1433;Database=Nostalgia;User Id=sa;Password=Cosa@2025;TrustServerCertificate=yes;");
-     }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseMySql(
+                    "Server=localhost;Database=nostalgia;User=root;Password=dev;Port=3366",
+                    new MySqlServerVersion(new Version(8, 4, 4))
+                );
+    }
 }
