@@ -1,5 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Security.Cryptography;
+using Cookbook.Data;
+using Nostalgia.Application;
+using Nostalgia.Core.Entities;
+using Nostalgia.Data;
 
 namespace Nostalgia.Sync;
 
@@ -7,6 +11,7 @@ static class Program
 {
     static async Task Main()
     {
+        var cosaService = new CosaService(new EntityFrameworkUnitOfWork(new NostalgiaEntities()), new CosaRepository(new NostalgiaEntities()));
         var timer = new Stopwatch();
         timer.Start();
         Console.WriteLine($"process started {timer.Elapsed}");
@@ -39,6 +44,15 @@ static class Program
                     string hash = await ComputeFileHashAsync(file);
                     Console.WriteLine($"\thash: {hash}");
                     Interlocked.Increment(ref fileCount);
+
+                    var cosa = new Cosa
+                    {
+                        Name = Path.GetFileName(file),
+                        Path = file,
+                        Hash = hash,
+                        ScanId = 1
+                    };
+    cosaService.AddCosa(cosa);
                 }));
             }
 

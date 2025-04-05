@@ -1,5 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <ItemGroup>
+    <ProjectReference Include="..\Nostalgia.Core\Nostalgia.Core.csproj" />
+    <ProjectReference Include="..\Nostalgia.Data\Nostalgia.Data.csproj" />
+    <ProjectReference Include="..\Nostalgia.Application\Nostalgia.Application.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
