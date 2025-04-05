@@ -11,7 +11,6 @@ static class Program
 {
     static async Task Main()
     {
-        var cosaService = new CosaService(new EntityFrameworkUnitOfWork(new NostalgiaEntities()), new CosaRepository(new NostalgiaEntities()));
         var timer = new Stopwatch();
         timer.Start();
         Console.WriteLine($"process started {timer.Elapsed}");
@@ -50,9 +49,11 @@ static class Program
                         Name = Path.GetFileName(file),
                         Path = file,
                         Hash = hash,
-                        ScanId = 1
+                        ScanId = 99
                     };
-    cosaService.AddCosa(cosa);
+                    var entities = new NostalgiaEntities();
+                    var cosaService = new CosaService(new EntityFrameworkUnitOfWork(entities), new CosaRepository(entities));
+                    cosaService.AddCosa(cosa);
                 }));
             }
 
