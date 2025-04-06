@@ -27,3 +27,7 @@ file count: 85267
 process finished 04:39:30.5904823    
 222GB
 
+directory count: 1319
+file count: 171943
+process finished 00:48:55.0083417
+1.4TB
