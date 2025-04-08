@@ -12,7 +12,7 @@ cosas
     dotnet ef migrations add InitialMigration
     dotnet ef database update
 
-    docker run -p 3366:3306 --name nostalgia -e MYSQL_ROOT_PASSWORD=dev -d mysql:8.0.14
+    docker run -p 3366:3306 --name nostalgia -e MYSQL_ROOT_PASSWORD=dev -d mysql:8.4.4
     docker exec -it nostalgia mysql -uroot -p
     create database nostalgia;
     exit
