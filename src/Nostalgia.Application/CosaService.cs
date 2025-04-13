@@ -35,6 +35,6 @@ public class CosaService : ICosaService
 
     public int GetCosaCount()
     {
-        throw new NotImplementedException();
+        return CosaRepository.GetCount();
     }
 }

@@ -103,4 +103,20 @@ public class CosaServiceTest
         Assert.Equal("TestCosa02", cosas[1].Name);
     }
 
+    [Fact]
+    public void GetCosaCountShouldReturnCount()
+    {
+        // Arrange
+        var unitOfWorkMock = new Mock<IUnitOfWork>();
+        var cosaRepositoryMock = new Mock<ICosaRepository>();
+        cosaRepositoryMock.Setup(repo => repo.GetCount()).Returns(3);
+        var cosaService = new CosaService(unitOfWorkMock.Object, cosaRepositoryMock.Object);
+        int actual;
+
+        // Act 
+        actual = cosaService.GetCosaCount();
+
+        // Assert
+        Assert.Equal(3, actual);
+    }
 }
