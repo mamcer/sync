@@ -13,10 +13,10 @@ public class CosaServiceTest
         // Arrange
         var unitOfWorkMock = new Mock<IUnitOfWork>();
         var cosaRepositoryMock = new Mock<ICosaRepository>();
-        
+
         // Act
         var cosaService = new CosaService(unitOfWorkMock.Object, cosaRepositoryMock.Object);
-        
+
         // Assert
         Assert.NotNull(cosaService.UnitOfWork);
         Assert.NotNull(cosaService.CosaRepository);
@@ -32,5 +32,21 @@ public class CosaServiceTest
 
         // Act & Assert
         _ = Assert.Throws<ArgumentNullException>(() => cosaService.AddCosa(default));
+    }
+
+    [Fact]
+    public void AddCosaShouldCallRepositoryAdd()
+    {
+        // Arrange
+        var unitOfWorkMock = new Mock<IUnitOfWork>();
+        var cosaRepositoryMock = new Mock<ICosaRepository>();
+        var cosaService = new CosaService(unitOfWorkMock.Object, cosaRepositoryMock.Object);
+        var cosa = new Cosa { Id = 1, Name = "TestCosa" };
+
+        // Act 
+        _ = cosaService.AddCosa(cosa);
+
+        // Assert
+        cosaRepositoryMock.Verify(repo => repo.Add(cosa), Times.Once);
     }
 }
