@@ -31,3 +31,7 @@ directory count: 1319
 file count: 171943  
 process finished 00:48:55.0083417  
 1.4TB  
+
+## coverage
+
+    dotnet dotCover cover-dotnet --output=coverage.html --reporttype=HTML --filters=-:"*.Test;-:testhost;" -- test Nostalgia.sln
