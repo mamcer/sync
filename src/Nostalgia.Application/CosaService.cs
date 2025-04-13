@@ -30,7 +30,7 @@ public class CosaService : ICosaService
 
     public IEnumerable<Cosa> GetAllCosas()
     {
-        throw new NotImplementedException();
+        return CosaRepository.GetAll();
     }
 
     public int GetCosaCount()

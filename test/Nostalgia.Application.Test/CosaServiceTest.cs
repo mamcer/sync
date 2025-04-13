@@ -83,4 +83,24 @@ public class CosaServiceTest
         Assert.NotNull(actual);
         Assert.Equal(cosa, actual);
     }
+
+    [Fact]
+    public void GetAllCosasShouldReturnAllCosas()
+    {
+        // Arrange
+        var unitOfWorkMock = new Mock<IUnitOfWork>();
+        var cosaRepositoryMock = new Mock<ICosaRepository>();
+        cosaRepositoryMock.Setup(repo => repo.GetAll()).Returns(new List<Cosa> { new Cosa { Id = 1, Name = "TestCosa01" }, new Cosa { Id = 2, Name = "TestCosa02" } });
+        var cosaService = new CosaService(unitOfWorkMock.Object, cosaRepositoryMock.Object);
+        List<Cosa> cosas;
+
+        // Act 
+        cosas = cosaService.GetAllCosas().ToList();
+
+        // Assert
+        Assert.NotNull(cosas);
+        Assert.Equal(2, cosas.Count);
+        Assert.Equal("TestCosa02", cosas[1].Name);
+    }
+
 }
