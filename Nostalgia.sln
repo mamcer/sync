@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F8D0F17A-F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nostalgia.Core.Test", "test\Nostalgia.Core.Test\Nostalgia.Core.Test.csproj", "{C89ECCF8-E7BD-4E32-93FC-A5EE4A580ECD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nostalgia.Application.Test", "test\Nostalgia.Application.Test\Nostalgia.Application.Test.csproj", "{7E580D7B-7128-4D5F-8CAA-7C173269D6E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,8 +46,13 @@ Global
 		{C89ECCF8-E7BD-4E32-93FC-A5EE4A580ECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C89ECCF8-E7BD-4E32-93FC-A5EE4A580ECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C89ECCF8-E7BD-4E32-93FC-A5EE4A580ECD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E580D7B-7128-4D5F-8CAA-7C173269D6E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E580D7B-7128-4D5F-8CAA-7C173269D6E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E580D7B-7128-4D5F-8CAA-7C173269D6E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E580D7B-7128-4D5F-8CAA-7C173269D6E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C89ECCF8-E7BD-4E32-93FC-A5EE4A580ECD} = {F8D0F17A-F59E-46A3-8E59-D43D08CDB8D4}
+		{7E580D7B-7128-4D5F-8CAA-7C173269D6E2} = {F8D0F17A-F59E-46A3-8E59-D43D08CDB8D4}
 	EndGlobalSection
 EndGlobal
