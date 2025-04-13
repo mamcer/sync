@@ -17,4 +17,24 @@ public class CosaTest
         Assert.Equal(0, cosa.ScanId);
         Assert.Equal(string.Empty, cosa.Hash);
     }
+
+    [Fact]
+    public void PropertySettersShouldWork()
+    {
+        // Arrange
+        var cosa = new Cosa();
+        var path = "testPath";
+        var id = 1;
+        var hash = "testHash";
+
+        // Act
+        cosa.Path = path;
+        cosa.ScanId = id;
+        cosa.Hash = hash;
+
+        // Assert
+        Assert.Equal(path, cosa.Path);
+        Assert.Equal(id, cosa.ScanId);
+        Assert.Equal(hash, cosa.Hash);
+    }
 }
