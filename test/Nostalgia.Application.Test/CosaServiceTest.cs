@@ -49,4 +49,38 @@ public class CosaServiceTest
         // Assert
         cosaRepositoryMock.Verify(repo => repo.Add(cosa), Times.Once);
     }
+
+    [Fact]
+    public void AddCosaShouldCallSaveChanges()
+    {
+        // Arrange
+        var unitOfWorkMock = new Mock<IUnitOfWork>();
+        var cosaRepositoryMock = new Mock<ICosaRepository>();
+        var cosaService = new CosaService(unitOfWorkMock.Object, cosaRepositoryMock.Object);
+        var cosa = new Cosa { Id = 1, Name = "TestCosa" };
+
+        // Act 
+        _ = cosaService.AddCosa(cosa);
+
+        // Assert
+        unitOfWorkMock.Verify(repo => repo.SaveChanges(), Times.Once);
+    }
+
+    [Fact]
+    public void AddCosaShouldReturnCosa()
+    {
+        // Arrange
+        var unitOfWorkMock = new Mock<IUnitOfWork>();
+        var cosaRepositoryMock = new Mock<ICosaRepository>();
+        var cosaService = new CosaService(unitOfWorkMock.Object, cosaRepositoryMock.Object);
+        var cosa = new Cosa { Id = 1, Name = "TestCosa" };
+        Cosa actual;
+
+        // Act 
+        actual = cosaService.AddCosa(cosa);
+
+        // Assert
+        Assert.NotNull(actual);
+        Assert.Equal(cosa, actual);
+    }
 }
