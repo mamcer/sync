@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nostalgia.Sync", "Nostalgia.Sync\Nostalgia.Sync.csproj", "{EE58D4BE-6A53-4F34-9DED-1907B4336AFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nostalgia.Sync", "src\Nostalgia.Sync\Nostalgia.Sync.csproj", "{EE58D4BE-6A53-4F34-9DED-1907B4336AFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nostalgia.Core", "Nostalgia.Core\Nostalgia.Core.csproj", "{AB9452EA-9A7C-4367-B14D-E9B33A7C9B31}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nostalgia.Core", "src\Nostalgia.Core\Nostalgia.Core.csproj", "{AB9452EA-9A7C-4367-B14D-E9B33A7C9B31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nostalgia.Data", "Nostalgia.Data\Nostalgia.Data.csproj", "{0BED1130-4A95-480A-8D53-64F2AC8B1CA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nostalgia.Data", "src\Nostalgia.Data\Nostalgia.Data.csproj", "{0BED1130-4A95-480A-8D53-64F2AC8B1CA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nostalgia.Application", "Nostalgia.Application\Nostalgia.Application.csproj", "{3FF033C5-5822-46E0-89B5-597DF3D12936}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nostalgia.Application", "src\Nostalgia.Application\Nostalgia.Application.csproj", "{3FF033C5-5822-46E0-89B5-597DF3D12936}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
