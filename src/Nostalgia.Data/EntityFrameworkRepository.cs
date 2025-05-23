@@ -1,7 +1,7 @@
+namespace Cookbook.Data;
+
 using Nostalgia.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
-
-namespace Cookbook.Data;
 
 public class EntityFrameworkRepository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class
 {

@@ -1,7 +1,7 @@
+namespace Nostalgia.Data;
+
 using Nostalgia.Core.Entities;
 using Microsoft.EntityFrameworkCore;
-
-namespace Nostalgia.Data;
 
 public class NostalgiaEntities : DbContext
 {

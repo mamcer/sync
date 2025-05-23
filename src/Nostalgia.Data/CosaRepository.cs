@@ -1,10 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿namespace Cookbook.Data;
 
 using Nostalgia.Core.Entities;
 using Nostalgia.Core.Interfaces;
 using Nostalgia.Data;
-
-namespace Cookbook.Data;
 
 public class CosaRepository : EntityFrameworkRepository<Cosa, int>, ICosaRepository
 {

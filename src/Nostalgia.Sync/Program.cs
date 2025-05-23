@@ -1,11 +1,11 @@
-﻿using System.Diagnostics;
+﻿namespace Nostalgia.Sync;
+
+using System.Diagnostics;
 using System.Security.Cryptography;
 using Cookbook.Data;
 using Nostalgia.Application;
 using Nostalgia.Core.Entities;
 using Nostalgia.Data;
-
-namespace Nostalgia.Sync;
 
 static class Program
 {

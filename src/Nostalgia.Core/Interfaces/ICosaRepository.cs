@@ -1,6 +1,6 @@
-using Nostalgia.Core.Entities;
-
 namespace Nostalgia.Core.Interfaces;
+
+using Nostalgia.Core.Entities;
 
 public interface ICosaRepository : IRepository<Cosa, int>
 {
