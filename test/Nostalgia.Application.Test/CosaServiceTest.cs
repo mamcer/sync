@@ -31,7 +31,7 @@ public class CosaServiceTest
         var cosaService = new CosaService(unitOfWorkMock.Object, cosaRepositoryMock.Object);
 
         // Act & Assert
-        _ = Assert.Throws<ArgumentNullException>(() => cosaService.AddCosa(default));
+        _ = Assert.Throws<ArgumentNullException>(() => cosaService.AddCosa(default!));
     }
 
     [Fact]
