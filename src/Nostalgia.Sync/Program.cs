@@ -1,63 +1,67 @@
-﻿namespace Nostalgia.Sync;
-
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Security.Cryptography;
+using System.Threading;
+using System.Threading.Tasks;
 using Cookbook.Data;
 using Nostalgia.Application;
 using Nostalgia.Core.Entities;
 using Nostalgia.Data;
 
-static class Program
+namespace Nostalgia.Sync;
+
+/// <summary>
+/// Main entry point for the Nostalgia.Sync application.
+/// </summary>
+internal static class Program
 {
-    static async Task Main()
+    private const string DefaultDirectoryPath = "/home/mario/Desktop/nostalgia/scan";
+    private const int DefaultScanId = 99;
+
+    /// <summary>
+    /// Application entry point.
+    /// </summary>
+    public static async Task Main()
     {
         var timer = new Stopwatch();
         timer.Start();
-        Console.WriteLine($"process started {timer.Elapsed}");
+        Console.WriteLine($"Process started {timer.Elapsed}");
 
-        // read
-        string directoryPath = "/home/mario/Desktop/nostalgia/scan";
-
-        var paths = new List<string>() { directoryPath };
+        var paths = new List<string> { DefaultDirectoryPath };
         int fileCount = 0;
         int directoryCount = 0;
-
         var tasks = new List<Task>();
         int coreCount = Environment.ProcessorCount;
 
         for (int i = 0; i < paths.Count; i++)
         {
-            var files = Directory.GetFiles(paths[i]);
+            string currentPath = paths[i];
+            string[] files = Array.Empty<string>();
+            string[] directories = Array.Empty<string>();
+            try
+            {
+                files = Directory.GetFiles(currentPath);
+                directories = Directory.GetDirectories(currentPath);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error accessing {currentPath}: {ex.Message}");
+                continue;
+            }
+
             foreach (var file in files)
             {
-
                 if (tasks.Count >= coreCount)
                 {
                     await Task.WhenAny(tasks);
                     tasks.RemoveAll(t => t.IsCompleted);
                 }
 
-                tasks.Add(Task.Run(async () =>
-                {
-                    Console.WriteLine($"\tfile: {file}");
-                    string hash = await ComputeFileHashAsync(file);
-                    Console.WriteLine($"\thash: {hash}");
-                    Interlocked.Increment(ref fileCount);
-
-                    var cosa = new Cosa
-                    {
-                        Name = Path.GetFileName(file),
-                        Path = file,
-                        Hash = hash,
-                        ScanId = 99
-                    };
-                    var entities = new NostalgiaEntities();
-                    var cosaService = new CosaService(new EntityFrameworkUnitOfWork(entities), new CosaRepository(entities));
-                    cosaService.AddCosa(cosa);
-                }));
+                tasks.Add(ProcessFileAsync(file, () => Interlocked.Increment(ref fileCount)));
             }
 
-            var directories = Directory.GetDirectories(paths[i]);
             foreach (var directory in directories)
             {
                 paths.Add(directory);
@@ -65,21 +69,51 @@ static class Program
             }
         }
 
-        // persist
-
         await Task.WhenAll(tasks);
-        Console.WriteLine($"directory count: {directoryCount}\nfile count: {fileCount}");
-        Console.WriteLine($"process finished {timer.Elapsed}");
+        Console.WriteLine($"Directory count: {directoryCount}\nFile count: {fileCount}");
+        Console.WriteLine($"Process finished {timer.Elapsed}");
         timer.Stop();
     }
 
-    static async Task<string> ComputeFileHashAsync(string filePath)
+    /// <summary>
+    /// Processes a single file: computes its hash and persists its metadata.
+    /// </summary>
+    private static async Task ProcessFileAsync(string file, Action incrementFileCount)
     {
-        using (var sha256 = SHA256.Create())
-        using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true))
+        try
         {
-            var hashBytes = await sha256.ComputeHashAsync(stream);
-            return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+            Console.WriteLine($"\tFile: {file}");
+            string hash = await ComputeFileHashAsync(file);
+            Console.WriteLine($"\tHash: {hash}");
+            incrementFileCount();
+
+            var cosa = new Cosa
+            {
+                Name = Path.GetFileName(file),
+                Path = file,
+                Hash = hash,
+                ScanId = DefaultScanId
+            };
+
+            // In a real application, use dependency injection for these services
+            using var entities = new NostalgiaEntities();
+            var cosaService = new CosaService(new EntityFrameworkUnitOfWork(entities), new CosaRepository(entities));
+            cosaService.AddCosa(cosa);
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error processing file {file}: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Computes the SHA256 hash of a file asynchronously.
+    /// </summary>
+    private static async Task<string> ComputeFileHashAsync(string filePath)
+    {
+        using var sha256 = SHA256.Create();
+        using var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true);
+        var hashBytes = await sha256.ComputeHashAsync(stream);
+        return BitConverter.ToString(hashBytes).Replace("-", string.Empty).ToLowerInvariant();
     }
 }
